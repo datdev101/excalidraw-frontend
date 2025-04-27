@@ -8,8 +8,8 @@ import Footer from "./components/footer/FooterCenter";
 import LiveCollaborationTrigger from "./components/live-collaboration/LiveCollaborationTrigger";
 import MainMenu from "./components/main-menu/MainMenu";
 import WelcomeScreen from "./components/welcome-screen/WelcomeScreen";
-import { defaultLang } from "./i18n";
 import { EditorJotaiProvider, editorJotaiStore } from "./editor-jotai";
+import { defaultLang } from "./i18n";
 import polyfill from "./polyfill";
 
 import "./css/app.scss";
@@ -214,56 +214,56 @@ export const Excalidraw = React.memo(ExcalidrawBase, areEqual);
 Excalidraw.displayName = "Excalidraw";
 
 export {
+  getNonDeletedElements,
   getSceneVersion,
   hashElementsVersion,
   hashString,
-  getNonDeletedElements,
 } from "@excalidraw/element";
 
-export { getTextFromElements } from "@excalidraw/element/textElement";
 export { isInvisiblySmallElement } from "@excalidraw/element/sizeHelpers";
+export { getTextFromElements } from "@excalidraw/element/textElement";
 
-export { defaultLang, useI18n, languages } from "./i18n";
 export {
   restore,
   restoreAppState,
   restoreElements,
   restoreLibraryItems,
 } from "./data/restore";
+export { defaultLang, languages, useI18n } from "./i18n";
 
 export { reconcileElements } from "./data/reconcile";
 
 export {
-  exportToCanvas,
   exportToBlob,
-  exportToSvg,
+  exportToCanvas,
   exportToClipboard,
+  exportToSvg,
 } from "@excalidraw/utils/export";
 
-export { serializeAsJSON, serializeLibraryAsJSON } from "./data/json";
+export { getFreeDrawSvgPath } from "@excalidraw/element/renderElement";
+export { isLinearElement } from "@excalidraw/element/typeChecks";
 export {
   loadFromBlob,
-  loadSceneOrLibraryFromBlob,
   loadLibraryFromBlob,
+  loadSceneOrLibraryFromBlob,
 } from "./data/blob";
-export { getFreeDrawSvgPath } from "@excalidraw/element/renderElement";
-export { mergeLibraryItems, getLibraryItemsHash } from "./data/library";
-export { isLinearElement } from "@excalidraw/element/typeChecks";
+export { serializeAsJSON, serializeLibraryAsJSON } from "./data/json";
+export { getLibraryItemsHash, mergeLibraryItems } from "./data/library";
 
 export {
-  FONT_FAMILY,
-  THEME,
-  MIME_TYPES,
-  ROUNDNESS,
   DEFAULT_LASER_COLOR,
-  UserIdleState,
+  FONT_FAMILY,
+  MIME_TYPES,
   normalizeLink,
+  ROUNDNESS,
+  THEME,
+  UserIdleState,
 } from "@excalidraw/common";
 
 export {
+  bumpVersion,
   mutateElement,
   newElementWith,
-  bumpVersion,
 } from "@excalidraw/element/mutateElement";
 
 export { CaptureUpdateAction } from "./store";
@@ -275,34 +275,31 @@ export {
   viewportCoordsToSceneCoords,
 } from "@excalidraw/common";
 
-export { Sidebar } from "./components/Sidebar/Sidebar";
-export { Button } from "./components/Button";
-export { Footer };
-export { MainMenu };
 export { useDevice } from "./components/App";
-export { WelcomeScreen };
-export { LiveCollaborationTrigger };
+export { Button } from "./components/Button";
+export { Sidebar } from "./components/Sidebar/Sidebar";
 export { Stats } from "./components/Stats";
+export { Footer, LiveCollaborationTrigger, MainMenu, WelcomeScreen };
 
 export { DefaultSidebar } from "./components/DefaultSidebar";
 export { TTDDialog } from "./components/TTDDialog/TTDDialog";
 export { TTDDialogTrigger } from "./components/TTDDialog/TTDDialogTrigger";
 
-export { zoomToFitBounds } from "./actions/actionCanvas";
-export { convertToExcalidrawElements } from "./data/transform";
 export {
   getCommonBounds,
   getVisibleSceneBounds,
 } from "@excalidraw/element/bounds";
+export { zoomToFitBounds } from "./actions/actionCanvas";
+export { convertToExcalidrawElements } from "./data/transform";
 
 export {
+  elementPartiallyOverlapsWithOrContainsBBox,
   elementsOverlappingBBox,
   isElementInsideBBox,
-  elementPartiallyOverlapsWithOrContainsBBox,
 } from "@excalidraw/utils/withinBounds";
 
+export { isElementLink } from "@excalidraw/element/elementLink";
 export { DiagramToCodePlugin } from "./components/DiagramToCodePlugin/DiagramToCodePlugin";
 export { getDataURL } from "./data/blob";
-export { isElementLink } from "@excalidraw/element/elementLink";
 
 export { setCustomTextMetricsProvider } from "@excalidraw/element/textMeasurements";

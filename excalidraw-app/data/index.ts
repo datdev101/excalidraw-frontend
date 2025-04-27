@@ -1,3 +1,6 @@
+import { bytesToHexString } from "@excalidraw/common";
+import { isInvisiblySmallElement } from "@excalidraw/element/sizeHelpers";
+import { isInitializedImageElement } from "@excalidraw/element/typeChecks";
 import {
   compressData,
   decompressData,
@@ -9,26 +12,23 @@ import {
 } from "@excalidraw/excalidraw/data/encryption";
 import { serializeAsJSON } from "@excalidraw/excalidraw/data/json";
 import { restore } from "@excalidraw/excalidraw/data/restore";
-import { isInvisiblySmallElement } from "@excalidraw/element/sizeHelpers";
-import { isInitializedImageElement } from "@excalidraw/element/typeChecks";
 import { t } from "@excalidraw/excalidraw/i18n";
-import { bytesToHexString } from "@excalidraw/common";
 
 import type { UserIdleState } from "@excalidraw/common";
-import type { ImportedDataState } from "@excalidraw/excalidraw/data/types";
+import type { MakeBrand } from "@excalidraw/common/utility-types";
 import type { SceneBounds } from "@excalidraw/element/bounds";
 import type {
   ExcalidrawElement,
   FileId,
   OrderedExcalidrawElement,
 } from "@excalidraw/element/types";
+import type { ImportedDataState } from "@excalidraw/excalidraw/data/types";
 import type {
   AppState,
   BinaryFileData,
   BinaryFiles,
   SocketId,
 } from "@excalidraw/excalidraw/types";
-import type { MakeBrand } from "@excalidraw/common/utility-types";
 
 import {
   DELETED_ELEMENT_TIMEOUT,
@@ -36,8 +36,9 @@ import {
   ROOM_ID_BYTES,
 } from "../app_constants";
 
+import { getStorageBackend } from "./config";
+
 import { encodeFilesForUpload } from "./FileManager";
-import { saveFilesToFirebase } from "./firebase";
 
 import type { WS_SUBTYPES } from "../app_constants";
 
@@ -320,7 +321,9 @@ export const exportToBackend = async (
       url.hash = `json=${json.id},${encryptionKey}`;
       const urlString = url.toString();
 
-      await saveFilesToFirebase({
+      const storageBackend = await getStorageBackend();
+      // await saveFilesToFirebase({
+      await storageBackend.saveFilesToStorageBackend({
         prefix: `/files/shareLinks/${json.id}`,
         files: filesToUpload,
       });
